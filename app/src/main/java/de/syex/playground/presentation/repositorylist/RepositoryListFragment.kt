@@ -6,15 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import de.syex.playground.R
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * A [Fragment] to list public GitHub repositories of a user.
  */
 class RepositoryListFragment : Fragment() {
 
-    private lateinit var viewModel: RepositoryListViewModel
+    private val viewModel: RepositoryListViewModel by viewModels { RepositoryListViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,9 +26,12 @@ class RepositoryListFragment : Fragment() {
         return inflater.inflate(R.layout.repository_list_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RepositoryListViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.stateFlow
+            .onEach { println(it) }
+            .launchIn(lifecycleScope)
     }
 
     override fun onResume() {

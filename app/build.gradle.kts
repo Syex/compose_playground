@@ -65,6 +65,7 @@ dependencies {
     testImplementation("org.junit.vintage:junit-vintage-engine:$jUnit")
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines")
+    testImplementation("app.cash.turbine:turbine:0.2.1")
     testImplementation("com.google.truth:truth:1.0.1")
     testImplementation("io.mockk:mockk:1.10.0")
 }

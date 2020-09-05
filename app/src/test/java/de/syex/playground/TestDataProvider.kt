@@ -2,6 +2,9 @@ package de.syex.playground
 
 import de.syex.playground.data.dto.LicenseDto
 import de.syex.playground.data.dto.RepositoryDto
+import de.syex.playground.domain.model.License
+import de.syex.playground.domain.model.Repository
+import java.util.*
 
 object TestDataProvider {
 
@@ -33,5 +36,35 @@ object TestDataProvider {
         updated_at,
         url,
         watchers_count
+    )
+
+    fun repository(
+        id: Int = 0,
+        createdAt: Date = Date(),
+        description: String? = null,
+        disabled: Boolean = false,
+        fork: Boolean = false,
+        forksCount: Int = 0,
+        fullName: String = "",
+        license: License? = null,
+        name: String = "",
+        openIssuesCount: Int = 0,
+        updatedAt: Date = Date(),
+        url: String = "",
+        watchersCount: Int = 0
+    ) = Repository(
+        id,
+        createdAt,
+        description,
+        disabled,
+        fork,
+        forksCount,
+        fullName,
+        license,
+        name,
+        openIssuesCount,
+        updatedAt,
+        url,
+        watchersCount
     )
 }
