@@ -23,7 +23,11 @@ import kotlinx.coroutines.flow.onEach
 class RepositoryListFragment : Fragment() {
 
     private val viewModel: RepositoryListViewModel by viewModels { RepositoryListViewModelFactory() }
-    private val repoAdapter = RepositoryListAdapter()
+    private val repoAdapter by lazy {
+        RepositoryListAdapter(
+            onRepoClickCallback = { viewModel.onRepositoryClicked(it) }
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

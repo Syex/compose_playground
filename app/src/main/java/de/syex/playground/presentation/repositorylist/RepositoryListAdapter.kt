@@ -13,7 +13,9 @@ import kotlinx.android.synthetic.main.item_repository.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RepositoryListAdapter : ListAdapter<Repository, RepositoryListAdapter.ViewHolder>(
+class RepositoryListAdapter(
+    private val onRepoClickCallback: (Repository) -> Unit
+) : ListAdapter<Repository, RepositoryListAdapter.ViewHolder>(
     RepoItemCallback()
 ) {
 
@@ -27,6 +29,7 @@ class RepositoryListAdapter : ListAdapter<Repository, RepositoryListAdapter.View
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val repo = getItem(position)
         with(holder.containerView) {
+            setOnClickListener { onRepoClickCallback(repo) }
             repoName.text = repo.name
             issueCount.text = repo.openIssuesCount.toString()
             forkCount.text = repo.forksCount.toString()
