@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import de.syex.playground.data.GitHubApi
 import de.syex.playground.domain.usecase.GetRepositories
+import de.syex.playground.domain.usecase.GetCommits
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType
 import retrofit2.Retrofit
@@ -30,4 +31,7 @@ object ServiceLocator {
 
     val getRepositories: GetRepositories
         get() = GetRepositories(gitHubApi)
+
+    val getCommits: GetCommits
+        get() = GetCommits(gitHubApi)
 }
