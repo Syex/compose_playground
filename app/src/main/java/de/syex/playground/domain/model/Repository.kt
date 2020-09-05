@@ -2,6 +2,7 @@ package de.syex.playground.domain.model
 
 import de.syex.playground.data.dto.LicenseDto
 import de.syex.playground.data.dto.RepositoryDto
+import java.io.Serializable
 import java.time.Instant
 import java.util.*
 
@@ -22,13 +23,13 @@ data class Repository(
     val updatedAt: Date,
     val url: String,
     val watchersCount: Int
-)
+) : Serializable
 
 data class License(
     val key: String,
     val name: String,
     val url: String
-)
+) : Serializable
 
 fun RepositoryDto.toDomainModel() = Repository(
     id = id,

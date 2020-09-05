@@ -38,10 +38,6 @@ class RepositoryListViewModel(
                 }
             )
     }
-
-    fun onRepositoryClicked(repository: Repository) {
-
-    }
 }
 
 sealed class RepositoryListState {

@@ -9,6 +9,20 @@
         android:id="@+id/repositoryListFragment"
         android:name="de.syex.playground.presentation.repositorylist.RepositoryListFragment"
         android:label="Repository List"
-        tools:layout="@layout/repository_list_fragment" />
+        tools:layout="@layout/repository_list_fragment">
+        <action
+            android:id="@+id/action_to_detail"
+            app:destination="@id/repositoryDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/repositoryDetailFragment"
+        android:name="de.syex.playground.presentation.repositorydetail.RepositoryDetailFragment"
+        android:label="Repository Detail"
+        tools:layout="@layout/repository_detail_fragment">
+        <argument
+            android:name="repository"
+            app:argType="de.syex.playground.domain.model.Repository" />
+    </fragment>
 
 </navigation>

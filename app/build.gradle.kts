@@ -2,8 +2,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
-    id("kotlin-android")
     kotlin("plugin.serialization") version "1.4.0"
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {

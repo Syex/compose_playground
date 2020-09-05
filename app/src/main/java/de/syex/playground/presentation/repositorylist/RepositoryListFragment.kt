@@ -9,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.syex.playground.R
+import de.syex.playground.domain.model.Repository
 import kotlinx.android.synthetic.main.repository_list_fragment.*
 import kotlinx.android.synthetic.main.repository_list_fragment.view.*
 import kotlinx.coroutines.flow.launchIn
@@ -25,7 +27,7 @@ class RepositoryListFragment : Fragment() {
     private val viewModel: RepositoryListViewModel by viewModels { RepositoryListViewModelFactory() }
     private val repoAdapter by lazy {
         RepositoryListAdapter(
-            onRepoClickCallback = { viewModel.onRepositoryClicked(it) }
+            onRepoClickCallback = { navigateToDetail(it) }
         )
     }
 
@@ -60,6 +62,11 @@ class RepositoryListFragment : Fragment() {
             progressBar.hide()
             repoAdapter.submitList(state.repositories)
         }
+    }
+
+    private fun navigateToDetail(repository: Repository) {
+        val action = RepositoryListFragmentDirections.actionToDetail(repository)
+        findNavController().navigate(action)
     }
 
     override fun onResume() {
