@@ -12,6 +12,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+/**
+ * Change value to fetch repositories of a different user.
+ */
+private const val GITHUB_USER_NAME = "Syex"
+
 @Suppress("EXPERIMENTAL_API_USAGE")
 class RepositoryListViewModel(
     private val getRepositories: GetRepositories,
@@ -26,7 +31,7 @@ class RepositoryListViewModel(
     }
 
     private fun fetchRepositories() = viewModelScope.launch(dispatcher) {
-        getRepositories.execute(GetRepositories.Params("Syex"))
+        getRepositories.execute(GetRepositories.Params(GITHUB_USER_NAME))
             .fold(
                 onSuccess = {
                     println("Successfully fetched repos: $it")
