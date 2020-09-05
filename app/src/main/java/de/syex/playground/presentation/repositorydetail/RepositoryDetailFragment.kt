@@ -52,6 +52,9 @@ class RepositoryDetailFragment : Fragment() {
             progressBar.hide()
             commitsLabel.isVisible = true
             commitsCounts.text = state.commits.size.toString()
+
+            commitBarView.isVisible = true
+            commitBarView.nameOfMonth = "March"
         }
     }
 
