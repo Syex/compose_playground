@@ -8,16 +8,25 @@ import androidx.core.view.updateLayoutParams
 import de.syex.playground.R
 import kotlinx.android.synthetic.main.view_commit_bar.view.*
 
+private const val MAX_HEIGHT_IN_DP = 160f
+
 class CommitBarView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
-    var nameOfMonth: String = ""
+    var commitsPerMonth: CommitsPerMonth = CommitsPerMonth()
         set(value) {
             field = value
-            monthName.text = value
+            monthName.text = value.nameOfMonth
+
+            commitBar.updateLayoutParams {
+                val percentageOfMaxCommits =
+                    value.commitsInMonth.toFloat() / value.maximumCommitsInAnyMonth
+                val heightForCommits = MAX_HEIGHT_IN_DP * percentageOfMaxCommits
+                height = heightForCommits.toInt().toDp(context)
+            }
         }
 
     init {
@@ -29,6 +38,12 @@ class CommitBarView @JvmOverloads constructor(
         }
     }
 }
+
+data class CommitsPerMonth(
+    val nameOfMonth: String = "",
+    val commitsInMonth: Int = 0,
+    val maximumCommitsInAnyMonth: Int = Int.MAX_VALUE
+)
 
 private fun Int.toDp(context: Context) = TypedValue.applyDimension(
     TypedValue.COMPLEX_UNIT_DIP,

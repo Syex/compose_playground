@@ -54,7 +54,11 @@ class RepositoryDetailFragment : Fragment() {
             commitsCounts.text = state.commits.size.toString()
 
             commitBarView.isVisible = true
-            commitBarView.nameOfMonth = "March"
+            commitBarView.commitsPerMonth = CommitsPerMonth(
+                nameOfMonth = "March",
+                commitsInMonth = 50,
+                maximumCommitsInAnyMonth = 100
+            )
         }
     }
 
