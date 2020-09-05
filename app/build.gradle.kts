@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    id("kotlin-android")
     kotlin("plugin.serialization") version "1.4.0"
 }
 
@@ -38,6 +39,7 @@ android {
 }
 
 val coroutines = "1.3.9"
+val lifecycle = "2.2.0"
 
 dependencies {
     // Kotlin
@@ -47,6 +49,7 @@ dependencies {
     // Android
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.0.10")
     implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
