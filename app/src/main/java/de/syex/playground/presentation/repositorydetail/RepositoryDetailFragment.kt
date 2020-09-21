@@ -51,13 +51,15 @@ class RepositoryDetailFragment : Fragment() {
         is RepositoryDetailState.DisplayCommits -> {
             progressBar.hide()
             commitsLabel.isVisible = true
-            commitsCounts.text = state.commits.size.toString()
+            commitsCounts.text = state.commitViewDatas.sumBy { it.commits.size }.toString()
 
+            // just taking the first for simplicity, now, instead of showing all
+            val commitViewData = state.commitViewDatas.first()
             commitBarView.isVisible = true
             commitBarView.commitsPerMonth = CommitsPerMonth(
-                nameOfMonth = "March",
-                commitsInMonth = state.commits.size,
-                maximumCommitsInAnyMonth = 100
+                nameOfMonth = commitViewData.monthName,
+                commitsInMonth = commitViewData.commits.size,
+                maximumCommitsInAnyMonth = commitViewData.maxCommitsInAnyMonth
             )
         }
     }
