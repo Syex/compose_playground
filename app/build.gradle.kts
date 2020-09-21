@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
-    kotlin("plugin.serialization") version "1.4.0"
+    kotlin("plugin.serialization")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -27,6 +27,14 @@ android {
         }
     }
 
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = compose
+    }
+
     kotlinOptions {
         freeCompilerArgs = listOf("-Xallow-result-return-type")
     }
@@ -40,6 +48,7 @@ android {
 
 val coroutines = "1.3.9"
 val navigation = "2.3.0"
+val compose = "1.0.0-alpha03"
 
 dependencies {
     // Kotlin
@@ -52,6 +61,18 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navigation")
     implementation("androidx.navigation:navigation-ui-ktx:$navigation")
+
+    // Compose
+    implementation("androidx.compose.ui:ui:$compose")
+    // Tooling support (Previews, etc.)
+    implementation("androidx.ui:ui-tooling:$compose")
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation("androidx.compose.foundation:foundation:$compose")
+    // Material Design
+    implementation("androidx.compose.material:material:$compose")
+    // Material design icons
+    implementation("androidx.compose.material:material-icons-core:$compose")
+    implementation("androidx.compose.material:material-icons-extended:$compose")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
